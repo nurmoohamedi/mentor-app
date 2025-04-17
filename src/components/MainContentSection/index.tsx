@@ -1,18 +1,22 @@
-import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { DoorClosed, EyeClosedIcon, FilterIcon, Heart } from "lucide-react";
 
 export const MainContentSection = (): JSX.Element => {
   // Category data for the left sidebar
   const categories = [
     {
       id: "all",
-      name: "Все категории",
+      name: "Leadership",
       checked: true,
+      count: 543,
     },
     {
       id: "wordpress",
-      name: "WordPress",
+      name: "Product Management",
+      count: 450,
       checked: true,
       subcategories: [
         { id: "wp-plugin", name: "Плагин программирование", checked: true },
@@ -21,7 +25,8 @@ export const MainContentSection = (): JSX.Element => {
     },
     {
       id: "mobile",
-      name: "Мобильное программирование",
+      name: "Career Growth",
+      count: 389,
       checked: false,
       subcategories: [
         { id: "android-java", name: "Android (Java)", checked: false },
@@ -33,7 +38,8 @@ export const MainContentSection = (): JSX.Element => {
     },
     {
       id: "web",
-      name: "Веб -программирование",
+      name: "Startup",
+      count: 370,
       checked: false,
       subcategories: [
         { id: "asp-net", name: "Asp . net", checked: false },
@@ -42,34 +48,22 @@ export const MainContentSection = (): JSX.Element => {
         { id: "html-css-js", name: "HTML, CSS, JavaScript", checked: false },
       ],
     },
-    {
-      id: "languages",
-      name: "Язык программирования",
-      checked: true,
-      subcategories: [
-        { id: "python", name: "Питон", checked: true },
-        { id: "c-cpp", name: "C / C Plus", checked: false },
-        { id: "java", name: "Ява", checked: false },
-        { id: "javascript", name: "JavaScript", checked: false },
-        { id: "golang", name: "Иди, Ланг", checked: false },
-        { id: "csharp", name: "C #", checked: false },
-        { id: "ruby", name: "Рубин", checked: false },
-        { id: "php-lang", name: "PHP", checked: false },
-        { id: "swift", name: "Быстрый", checked: false },
-      ],
-    },
-    {
-      id: "frameworks",
-      name: "Рамки",
-      checked: true,
-      subcategories: [
-        { id: "laravel", name: "Луча", checked: true },
-        { id: "nuxtjs", name: "Девяносто Гс", checked: false },
-        { id: "angular", name: "Угловой", checked: false },
-        { id: "laravel2", name: "Личинка", checked: true },
-        { id: "django", name: "Джанго", checked: false },
-      ],
-    },
+  ];
+
+  const jobs = [
+    { name: "Founder", count: 134 },
+    { name: "CEO", count: 64 },
+    { name: "Senior Software Engineer", count: 61 },
+    { name: "CTO", count: 43 },
+    { name: "Engineering Manager", count: 40 },
+  ];
+
+  const companies = [
+    { name: "Microsoft", count: 35 },
+    { name: "Amazon", count: 12 },
+    { name: "Booking.com", count: 4 },
+    { name: "Google", count: 2 },
+    { name: "Uber", count: 2 },
   ];
 
   // Course data for the right side grid
@@ -172,128 +166,157 @@ export const MainContentSection = (): JSX.Element => {
   };
 
   return (
-    <div className="flex items-start gap-12 mt-[241px] mx-auto max-w-[1580px]">
+    <div className="flex items-start gap-[32px] mt-[32px] mx-auto max-w-[1580px]">
       {/* Left sidebar - Categories */}
-      <Card className="w-[479px] rounded-[35px] shadow-[0px_4px_24px_#0000001a]">
-        <CardContent className="p-9">
-          <h2 className="w-full mb-8 [font-family:'Vazirmatn',Helvetica] font-bold text-black text-[28px] text-right">
+      <Card className="bg-white rounded-[35px] shadow-[0px_4px_24px_#0000001a]">
+        <CardContent className="p-[24px]">
+          <h2 className="w-full mb-2 [font-family:'Vazirmatn',Helvetica] font-bold text-black text-[28px] text-right">
             Классификация курсов
           </h2>
 
           <div className="flex flex-col space-y-6">
-            {/* All categories */}
-            {renderCategoryItem(categories[0])}
-
-            {/* WordPress category with subcategories */}
-            <div className="flex flex-col space-y-3">
-              {renderCategoryItem(categories[1])}
-              <div className="flex flex-col space-y-3 ml-10">
-                {categories[1].subcategories.map((subcategory) => (
-                  <div key={subcategory.id}>
-                    {renderCategoryItem(subcategory, true)}
-                  </div>
-                ))}
+            <div className="my-4">
+              <div className="heading-3 mb-2">
+                <h1 className="text-[24px] text-left m-[16px_0]">Skills</h1>
+              </div>
+              <div className="RefinementList">
+                <div className="search mb-[8px]">
+                  <Input
+                    placeholder="Search for skills"
+                    className="p-[.5rem_.5rem] rounded-[8px]"
+                  />
+                </div>
+                <div className="list">
+                  {categories?.map((item) => (
+                    <div className="list-element flex justify-between p-3">
+                      <div className="flex gap-3">
+                        <input type="checkbox" name="" id="" />
+                        <p className="name text-[18px] leading-[0]">
+                          {item.name}
+                        </p>
+                      </div>
+                      <div className="count text-[18px] ">{item.count}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* Mobile programming category with subcategories */}
-            <div className="flex flex-col space-y-3">
-              {renderCategoryItem(categories[2])}
-              <div className="flex flex-col space-y-3 ml-10">
-                {categories[2].subcategories.map((subcategory) => (
-                  <div key={subcategory.id}>
-                    {renderCategoryItem(subcategory, true)}
-                  </div>
-                ))}
+            <div className="my-4">
+              <div className="heading-3 mb-2">
+                <h1 className="text-[24px] text-left m-[16px_0]">Job titles</h1>
+              </div>
+              <div className="RefinementList">
+                <div className="search mb-[8px]">
+                  <Input
+                    placeholder="Search for skills"
+                    className="p-[.5rem_.5rem] rounded-[8px]"
+                  />
+                </div>
+                <div className="list">
+                  {jobs?.map((item) => (
+                    <div className="list-element flex justify-between p-3">
+                      <div className="flex gap-3">
+                        <input type="checkbox" name="" id="" />
+                        <p className="name text-[18px] leading-[0]">
+                          {item.name}
+                        </p>
+                      </div>
+                      <div className="count text-[18px] ">{item.count}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* Web programming category with subcategories */}
-            <div className="flex flex-col space-y-3">
-              {renderCategoryItem(categories[3])}
-              <div className="flex flex-col space-y-3 ml-10">
-                {categories[3].subcategories.map((subcategory) => (
-                  <div key={subcategory.id}>
-                    {renderCategoryItem(subcategory, true)}
-                  </div>
-                ))}
+            <div className="my-4">
+              <div className="heading-3 mb-2">
+                <h1 className="text-[24px] text-left m-[16px_0]">Companies</h1>
+              </div>
+              <div className="RefinementList">
+                <div className="search mb-[8px]">
+                  <Input
+                    placeholder="Search for skills"
+                    className="p-[.5rem_.5rem] rounded-[8px]"
+                  />
+                </div>
+                <div className="list">
+                  {companies?.map((item) => (
+                    <div className="list-element flex justify-between p-3">
+                      <div className="flex gap-3">
+                        <input type="checkbox" name="" id="" />
+                        <p className="name text-[18px] leading-[0]">
+                          {item.name}
+                        </p>
+                      </div>
+                      <div className="count text-[18px] ">{item.count}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
+          </div>
 
-            {/* Programming languages category with subcategories */}
-            <div className="flex flex-col space-y-3">
-              {renderCategoryItem(categories[4])}
-              <div className="flex flex-col space-y-3 ml-10">
-                {categories[4].subcategories.map((subcategory) => (
-                  <div key={subcategory.id}>
-                    {renderCategoryItem(subcategory, true)}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Frameworks category with subcategories */}
-            <div className="flex flex-col space-y-3">
-              {renderCategoryItem(categories[5])}
-              <div className="flex flex-col space-y-3 ml-10">
-                {categories[5].subcategories.map((subcategory) => (
-                  <div key={subcategory.id}>
-                    {renderCategoryItem(subcategory, true)}
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="buttons mt-[24px]">
+            <Button className="w-full p-[24px] h-[48px] rounded-[36px] border-black text-xl font-bold bg-[#2c7fff] text-[#fff] cursor-pointer">
+              <FilterIcon size={20} className="mr-[8px]" />
+              More Filters
+            </Button>
+            <Button variant="outline" className="w-full p-[24px] mt-[16px] h-[48px] rounded-[36px] border-black text-xl font-bold bg-[#2c7fff] text-[#fff] cursor-pointer">
+              <Heart size={20} className="mr-[8px]" />
+              Save this Search
+            </Button>
+          </div>
+          <div className="mt-[16px] ml-[4px] cursor-pointer flex content-center">
+            <DoorClosed size={16} className="mr-[8px]" />
+            Reset all filters
           </div>
         </CardContent>
       </Card>
 
       {/* Right side - Course grid */}
-      <div className="grid grid-cols-2 gap-x-10 gap-y-12">
+      <div className="grid grid-cols-2 gap-x-[16px] gap-y-[16px]">
         {courses.map((course) => (
           <Card
             key={course.id}
-            className="w-[501px] rounded-[30px] shadow-[0px_0px_33px_#00000026] overflow-hidden"
+            className="w-full rounded-[30px] shadow-[0px_0px_33px_#00000026] overflow-hidden"
           >
             <CardContent className="p-0">
               <img
-                className="w-full h-[371px] object-cover"
+                className="w-full h-[250px] object-cover"
                 alt={course.title}
                 src={course.image}
               />
 
-              <div className="p-3.5">
-                <h3 className="font-bold text-black text-[32px] [font-family:'Vazirmatn',Helvetica] mb-4">
+              <div className="p-[24px]">
+                <h3 className="font-bold text-black text-[24px] [font-family:'Vazirmatn',Helvetica] mb-4">
                   {course.title}
                 </h3>
-
                 <p className="font-normal text-neutral-800 text-2xl [font-family:'Vazirmatn',Helvetica] mb-6">
                   {course.description}
                 </p>
-
                 <div className="flex items-end justify-end gap-[15px] mb-4">
-                  <div className="font-normal text-[#484848] text-[28px] text-right [font-family:'Vazirmatn',Helvetica]">
+                  <div className="font-normal text-[#484848] text-[24px] text-right [font-family:'Vazirmatn',Helvetica]">
                     {course.instructor}
                   </div>
                   <img
-                    className="w-[46px] h-[46px]"
+                    className="w-[32px] h-[32px]"
                     alt="Instructor"
                     src={course.instructorAvatar}
                   />
                 </div>
 
-                <Separator className="mb-6" />
+                <Separator className="mt-[8px] mb-[8px]" />
 
                 <div className="flex justify-between items-center">
-                  <div className="font-bold text-[#2c7fff] text-[38px] [font-family:'Vazirmatn',Helvetica]">
+                  <div className="font-bold text-[#2c7fff] text-[24px] [font-family:'Vazirmatn',Helvetica]">
                     {course.price}
                   </div>
 
                   <div className="flex items-center gap-[15px]">
-                    <div className="font-normal text-[#09e647] text-[38px] text-right [font-family:'Vazirmatn',Helvetica]">
+                    <div className="font-normal text-[#09e647] text-[24px] text-right [font-family:'Vazirmatn',Helvetica]">
                       {course.duration}
                     </div>
                     <img
-                      className="w-[46px] h-[46px]"
+                      className="w-[32px] h-[32px]"
                       alt="Time"
                       src={course.timeIcon}
                     />

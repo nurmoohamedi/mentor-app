@@ -1,12 +1,14 @@
+/* @import "tailwindcss"; */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind variants;
 
-@layer components {
+/* @layer components {
   .all-\[unset\] {
     all: unset;
   }
-}
+} */
 
 @layer base {
   :root {
@@ -78,11 +80,11 @@
 
 @layer base {
   * {
-    /* @apply border-border; */
+    /* @apply border-none outline-none; */
   }
 
   body {
-    /* @apply background text-foreground; */
+    /* @apply text-foreground; */
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -92,4 +94,13 @@
   margin: 0 auto;
   padding: 0;
   text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;  
+  padding: 0;
+}
+
+ul { 
+  list-style: none;
 }

@@ -39,16 +39,14 @@ export const FooterSection = (): JSX.Element => {
         </div>
 
         {/* Footer content container */}
-        <div className="absolute inset-0 flex justify-between px-24 pt-[101px]">
+        <div className="absolute left-[0] top-[250px] inset-[0] flex justify-between p-[32px_32px_32px_78px]">
           {/* Company description */}
-          <div className="w-[576px]">
-            <p className="font-['Vazirmatn',Helvetica] text-[28px] leading-7 text-black">
-              Lorem Ipsom - это изготовленный текст с простотой печатной
-              индустрии, используя графические дизайнеры, принтеры и тексты, но
-              газеты и журналы в столбцах и линиях по мере необходимости {"{"}
-              dot{"}"}
-              {"}"}
-              {"}"}
+          <div className="w-[400px]">
+            <p className="font-['Vazirmatn',Helvetica] text-[18px] leading-7 text-black text-left">
+              The Mentor App is a dynamic app designed to connect mentors with
+              mentees, fostering meaningful relationships for personal and
+              professional growth. Find the right mentorship experience with
+              Mentor App.
             </p>
           </div>
 
@@ -57,12 +55,12 @@ export const FooterSection = (): JSX.Element => {
             <h3 className="font-['Vazirmatn',Helvetica] font-bold text-2xl text-black mb-6">
               Быстрый доступ
             </h3>
-            <nav className="flex flex-col gap-2.5">
+            <nav className="flex flex-col gap-[4px]">
               {quickAccessLinks.map((link, index) => (
                 <a
                   key={index}
                   href={link.href}
-                  className="font-['Vazirmatn',Helvetica] font-normal text-[28px] leading-7 text-black hover:text-[#2c7fff]"
+                  className="font-['Vazirmatn',Helvetica] font-normal text-[16px] leading-7 text-black hover:text-[#2c7fff]"
                 >
                   {link.title}
                 </a>
@@ -75,12 +73,12 @@ export const FooterSection = (): JSX.Element => {
             <h3 className="font-['Vazirmatn',Helvetica] font-bold text-2xl text-black mb-6">
               Классификация курсов
             </h3>
-            <nav className="flex flex-col gap-2.5">
+            <nav className="flex flex-col gap-[4px]">
               {courseCategories.map((category, index) => (
                 <a
                   key={index}
                   href={category.href}
-                  className="font-['Vazirmatn',Helvetica] font-normal text-[28px] leading-7 text-black hover:text-[#2c7fff]"
+                  className="font-['Vazirmatn',Helvetica] font-normal text-[16px] leading-7 text-black hover:text-[#2c7fff]"
                 >
                   {category.title}
                 </a>

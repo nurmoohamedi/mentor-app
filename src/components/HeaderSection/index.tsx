@@ -17,8 +17,8 @@ import {
   export const HeaderSection = (): JSX.Element => {
     // Navigation menu items data
     const navItems = [
-      { label: "Главная", hasDropdown: false },
-      { label: "Контракты", hasDropdown: false },
+      { label: "Главная", hasDropdown: true },
+      { label: "Контракты", hasDropdown: true },
       { label: "Блог", hasDropdown: true },
       { label: "Курсы", hasDropdown: true },
     ];
@@ -33,22 +33,21 @@ import {
                 ITMentor
               </div>
             </div>
-            <div className="absolute left-[34px] top-3 h-[76px] w-[243px]">
+            {/* <div className="absolute left-[34px] top-3 h-[76px] w-[243px]">
               <div className="absolute left-[34px] top-[23px] whitespace-nowrap font-['Syncopate',Helvetica] text-[28px] font-normal tracking-[0] text-black leading-normal">
                 ITMentor
               </div>
-            </div>
+            </div> */}
           </div>
   
           {/* Navigation */}
           <NavigationMenu className="mx-auto">
-            <NavigationMenuList className="flex gap-8">
+            <NavigationMenuList className="flex gap-[8px]">
               {navItems.map((item, index) => (
                 <NavigationMenuItem key={index}>
                   {item.hasDropdown ? (
-                    <NavigationMenuTrigger className="flex items-center gap-2 bg-transparent font-['Vazirmatn',Helvetica] text-[18px] font-normal text-black">
+                    <NavigationMenuTrigger className="flex items-center gap-2 bg-transparent font-['Vazirmatn',Helvetica] text-[18px] font-normal text-black border-none">
                       {item.label}
-                      <ChevronDownIcon className="h-[35px] w-[35px]" />
                     </NavigationMenuTrigger>
                   ) : (
                     <div className="font-['Vazirmatn',Helvetica] text-[18px] font-normal text-black leading-7">
@@ -61,33 +60,33 @@ import {
           </NavigationMenu>
   
           {/* Right side buttons and icons */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-[8px]">
             {/* Registration button */}
             <Button
               variant="outline"
-              className="flex h-[72px] w-[226px] items-center justify-center gap-3.5 rounded-[36px] border-black font-['Vazirmatn',Helvetica] text-xl font-bold"
+              className="p-[24px] h-[36px] rounded-[36px] border-black text-xl font-bold gap-[4px] cursor-pointer"
             >
               Регистрация
-              <UserPlusIcon className="h-6 w-6" />
+              <UserPlusIcon size={20} className="h-3 w-3" />
             </Button>
   
             {/* Login button */}
-            <Button className="flex h-[72px] w-[181px] items-center justify-center gap-3.5 rounded-[36px] bg-[#2c7fff] font-['Vazirmatn',Helvetica] text-xl font-bold text-white">
+            <Button className="p-[24px] h-[36px] rounded-[36px] border-black text-xl font-bold bg-[#2c7fff] text-white cursor-pointer">
               Вход
-              <LogInIcon className="h-6 w-6" />
+              <LogInIcon size={20} className="h-6 w-6" />
             </Button>
   
             {/* Cart and SearchIcon */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-[8px]">
               <div className="relative">
-                <ShoppingCartIcon className="h-[52px] w-[52px]" />
-                <div className="absolute -right-1 -top-1 flex h-[25px] w-[25px] items-center justify-center rounded-full bg-[#2c7fff]">
+                <ShoppingCartIcon className="h-[32px] w-[32px] cursor-pointer" />
+                {/* <div className="absolute -right-1 -top-1 flex h-[25px] w-[25px] items-center justify-center rounded-full bg-[#2c7fff]">
                   <span className="font-['Vazirmatn',Helvetica] text-[28px] font-bold text-black [direction:rtl]">
                     ۰
                   </span>
-                </div>
+                </div> */}
               </div>
-              <SearchIcon className="h-[52px] w-[52px]" />
+              <SearchIcon className="h-[32px] w-[32px] cursor-pointer" />
             </div>
           </div>
         </div>
