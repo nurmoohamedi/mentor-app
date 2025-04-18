@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export const ActionBarSection = (): JSX.Element => {
+export const ActionBarSection = ({ formVars, setFormVars }: any): JSX.Element => {
   return (
     <div className="w-full flex flex-row gap-[16px] py-[32px] mt-12">
       <Card className="w-[700px] h-[40px] shadow-[0px_4px_24px_#0000001a] rounded-[35px]">
@@ -38,6 +38,8 @@ export const ActionBarSection = (): JSX.Element => {
               <Input
                 className="border-[0] shadow-none pl-[46px] text-[20px] font-normal text-neutral-800"
                 placeholder="Search for any skill, title or company"
+                value={formVars.searchKey}
+                onChange={(e) => setFormVars({...formVars, searchKey: e.target.value})}
               />
             </div>
           </div>

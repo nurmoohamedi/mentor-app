@@ -3,8 +3,59 @@ import { Separator } from "@/components/ui/separator";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { DoorClosed, EyeClosedIcon, FilterIcon, Heart } from "lucide-react";
+import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+// import { mockCourses } from "@/mocks/courses";
 
-export const MainContentSection = (): JSX.Element => {
+export const MainContentSection = ({ courses: mockCourses }: any): JSX.Element => {
+  const [formVars, setFormVars] = useState({
+    skills: [],
+    jobTitles: [],
+    companies: [],
+  });
+
+  const [filteredCourses, setFilteredCourses] = useState([...mockCourses]);
+
+  useEffect(() => {
+    const filtered = mockCourses.filter((course) => {
+      const skillMatch =
+        formVars.skills.length === 0 ||
+        formVars.skills.some((skill) => course.skills?.includes(skill));
+
+      const jobMatch =
+        formVars.jobTitles.length === 0 ||
+        formVars.jobTitles.some((job) => course.jobTitles?.includes(job));
+
+      const companyMatch =
+        formVars.companies.length === 0 ||
+        formVars.companies.some((comp) => course.companies?.includes(comp));
+
+      return skillMatch && jobMatch && companyMatch;
+    });
+
+    setFilteredCourses(filtered);
+  }, [formVars]);
+
+  // const toggleFilter = (type: string, value: string) => {
+  //   setFormVars((prev) => {
+  //     const currentValues = prev[type];
+  //     const updatedValues = currentValues.includes(value)
+  //       ? currentValues.filter((v) => v !== value)
+  //       : [...currentValues, value];
+  //     return { ...prev, [type]: updatedValues };
+  //   });
+  // };
+
+  const toggleFilter = (type, value: string) => {
+    setFormVars((prev) => {
+      const values = prev[type] as string[];
+      const newValues = values.includes(value)
+        ? values.filter((v) => v !== value)
+        : [...values, value];
+  
+      return { ...prev, [type]: newValues };
+    });
+  };
   // Category data for the left sidebar
   const categories = [
     {
@@ -66,76 +117,6 @@ export const MainContentSection = (): JSX.Element => {
     { name: "Uber", count: 2 },
   ];
 
-  // Course data for the right side grid
-  const courses = [
-    {
-      id: 1,
-      title: "Chatgpt Pro Training",
-      description: "Lorem ipsum сфабриковал текст с . . .",
-      image: "https://c.animaapp.com/m9jqfbic8vZpku/img/box-img-1.png",
-      instructor: "Али Шахбаз",
-      instructorAvatar: "https://c.animaapp.com/m9jqfbic8vZpku/img/icon-1.png",
-      price: "1,5 $",
-      duration: "13:31",
-      timeIcon: "https://c.animaapp.com/m9jqfbic8vZpku/img/time-icon-1.png",
-    },
-    {
-      id: 2,
-      title: "Учебный курс SQL Server",
-      description: "Lorem ipsum сфабриковал текст с . . .",
-      image: "https://c.animaapp.com/m9jqfbic8vZpku/img/box-img.png",
-      instructor: "Али Ахмади",
-      instructorAvatar: "https://c.animaapp.com/m9jqfbic8vZpku/img/icon.png",
-      price: "1,5 $",
-      duration: "1:37",
-      timeIcon: "https://c.animaapp.com/m9jqfbic8vZpku/img/time-icon.png",
-    },
-    {
-      id: 3,
-      title: "Усовершенствованное ...",
-      description: "Lorem ipsum сфабриковал текст с . . .",
-      image: "https://c.animaapp.com/m9jqfbic8vZpku/img/box-img-3.png",
-      instructor: "Абольфазл Аббаси",
-      instructorAvatar: "https://c.animaapp.com/m9jqfbic8vZpku/img/icon-3.png",
-      price: "1,5 $",
-      duration: "1:31",
-      timeIcon: "https://c.animaapp.com/m9jqfbic8vZpku/img/time-icon-3.png",
-    },
-    {
-      id: 4,
-      title: "Tailwind CSS",
-      description: "Lorem ipsum сфабриковал текст с . . .",
-      image: "https://c.animaapp.com/m9jqfbic8vZpku/img/box-img-2.png",
-      instructor: "Хасан Хосроверди",
-      instructorAvatar: "https://c.animaapp.com/m9jqfbic8vZpku/img/icon-2.png",
-      price: "1,5 $",
-      duration: "1:31",
-      timeIcon: "https://c.animaapp.com/m9jqfbic8vZpku/img/time-icon-2.png",
-    },
-    {
-      id: 5,
-      title: "Учебники по Python",
-      description: "Lorem ipsum сфабриковал текст с . . .",
-      image: "https://c.animaapp.com/m9jqfbic8vZpku/img/box-img-5.png",
-      instructor: "Али Шахбаз",
-      instructorAvatar: "https://c.animaapp.com/m9jqfbic8vZpku/img/icon-5.png",
-      price: "Бесплатно!",
-      duration: "1:31",
-      timeIcon: "https://c.animaapp.com/m9jqfbic8vZpku/img/time-icon-5.png",
-    },
-    {
-      id: 6,
-      title: "Asp . net core",
-      description: "Lorem ipsum сфабриковал текст с . . .",
-      image: "https://c.animaapp.com/m9jqfbic8vZpku/img/box-img-4.png",
-      instructor: "Али Шахбаз",
-      instructorAvatar: "https://c.animaapp.com/m9jqfbic8vZpku/img/icon-4.png",
-      price: "1,5 $",
-      duration: "1:31",
-      timeIcon: "https://c.animaapp.com/m9jqfbic8vZpku/img/time-icon-4.png",
-    },
-  ];
-
   // Render category item with checkbox
   const renderCategoryItem = (category, isSubcategory = false) => {
     return (
@@ -167,11 +148,10 @@ export const MainContentSection = (): JSX.Element => {
 
   return (
     <div className="flex items-start gap-[32px] mt-[32px] mx-auto max-w-[1580px]">
-      {/* Left sidebar - Categories */}
       <Card className="bg-white rounded-[35px] shadow-[0px_4px_24px_#0000001a]">
         <CardContent className="p-[24px]">
           <h2 className="w-full mb-2 [font-family:'Vazirmatn',Helvetica] font-bold text-black text-[28px] text-right">
-            Классификация курсов
+            Классификация менторов
           </h2>
 
           <div className="flex flex-col space-y-6">
@@ -187,15 +167,22 @@ export const MainContentSection = (): JSX.Element => {
                   />
                 </div>
                 <div className="list">
-                  {categories?.map((item) => (
-                    <div className="list-element flex justify-between p-3">
+                  {categories.map((item) => (
+                    <div
+                      key={item.name}
+                      className="list-element flex justify-between p-3"
+                    >
                       <div className="flex gap-3">
-                        <input type="checkbox" name="" id="" />
+                        <input
+                          type="checkbox"
+                          checked={formVars.skills.includes(item.name)}
+                          onChange={() => toggleFilter("skills", item.name)}
+                        />
                         <p className="name text-[18px] leading-[0]">
                           {item.name}
                         </p>
                       </div>
-                      <div className="count text-[18px] ">{item.count}</div>
+                      <div className="count text-[18px]">{item.count}</div>
                     </div>
                   ))}
                 </div>
@@ -216,7 +203,7 @@ export const MainContentSection = (): JSX.Element => {
                   {jobs?.map((item) => (
                     <div className="list-element flex justify-between p-3">
                       <div className="flex gap-3">
-                        <input type="checkbox" name="" id="" />
+                        <input type="checkbox" name="checkbox" id="" />
                         <p className="name text-[18px] leading-[0]">
                           {item.name}
                         </p>
@@ -239,15 +226,22 @@ export const MainContentSection = (): JSX.Element => {
                   />
                 </div>
                 <div className="list">
-                  {companies?.map((item) => (
-                    <div className="list-element flex justify-between p-3">
+                  {companies.map((item) => (
+                    <div
+                      key={item.name}
+                      className="list-element flex justify-between p-3"
+                    >
                       <div className="flex gap-3">
-                        <input type="checkbox" name="" id="" />
+                        <input
+                          type="checkbox"
+                          checked={formVars.skills.includes(item.name)}
+                          onChange={() => toggleFilter("jobTitles", item.name)}
+                        />
                         <p className="name text-[18px] leading-[0]">
                           {item.name}
                         </p>
                       </div>
-                      <div className="count text-[18px] ">{item.count}</div>
+                      <div className="count text-[18px]">{item.count}</div>
                     </div>
                   ))}
                 </div>
@@ -260,7 +254,10 @@ export const MainContentSection = (): JSX.Element => {
               <FilterIcon size={20} className="mr-[8px]" />
               More Filters
             </Button>
-            <Button variant="outline" className="w-full p-[24px] mt-[16px] h-[48px] rounded-[36px] border-black text-xl font-bold bg-[#2c7fff] text-[#fff] cursor-pointer">
+            <Button
+              variant="outline"
+              className="w-full p-[24px] mt-[16px] h-[48px] rounded-[36px] border-black text-xl font-bold bg-[#2c7fff] text-[#fff] cursor-pointer"
+            >
               <Heart size={20} className="mr-[8px]" />
               Save this Search
             </Button>
@@ -271,10 +268,8 @@ export const MainContentSection = (): JSX.Element => {
           </div>
         </CardContent>
       </Card>
-
-      {/* Right side - Course grid */}
       <div className="grid grid-cols-2 gap-x-[16px] gap-y-[16px]">
-        {courses.map((course) => (
+        {filteredCourses.map((course) => (
           <Card
             key={course.id}
             className="w-full rounded-[30px] shadow-[0px_0px_33px_#00000026] overflow-hidden"
