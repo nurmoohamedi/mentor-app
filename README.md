@@ -1,54 +1,65 @@
-# React + TypeScript + Vite
+# Модуль "Поиск ментора по фильтрам"
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Назначение
 
-Currently, two official plugins are available:
+Проверяется, что фильтры поиска наставников работают корректно.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Среда выполнения
 
-## Expanding the ESLint configuration
+Backend: C#(.NET),
+Frontend: React + Typescript + Vite + Tailwind
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Как использовать
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Открыть страницу поиска наставников.
+2. Ввести параметры поиска
+   2.1. Можно ввести имя ментора, цену за консультацию, название менторства
+   2.2. Можно выбрать рейтинг по звездочкам, язык, позицию, компанию можно выбрать из списка.
+3. Нажать «Поиск».
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Реализация со стороны бэка
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+{
+private readonly DatabaseContext \_databaseContext;
+public MentorFilterProvider(DatabaseContext databaseContext)
+{
+\_databaseContext = databaseContext;
+}
+public IEnumerable<Mentor> CompanyFilters(string company)
+{
+return \_databaseContext.Mentors.Where<Mentor>(x=>x.WorkingCompany==company);
+}
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+    public IEnumerable<Mentor> LanguageFilter(string language)
+    {
+        return _databaseContext.Mentors
+            .Where(m => m.Languages.Any(l => l.Equals(language.ToLower())));
+    }
+
+    public IEnumerable<Mentor> NameFilter(string name)
+    {
+        return _databaseContext.Mentors.Where<Mentor>(x => x.FullName == name);
+    }
+
+    public IEnumerable<Mentor> PositionFilter(string position)
+    {
+        return _databaseContext.Mentors
+            .Where(m => m.Positions.Any(p => p.Equals(position.ToLower())));
+    }
+
+    public IEnumerable<Mentor> PriceFilter(decimal price)
+    {
+        return _databaseContext.Mentors.Where<Mentor>(x => x.Topics.Any(x=>x.Price>price));
+    }
+
+    public IEnumerable<Mentor> TopicFilter(IEnumerable<string> topics)
+    {
+        return _databaseContext.Mentors.Where<Mentor>(x => x.Topics.Any(x => topics.Contains(x.TopicName)));
+    }
+
+    public IEnumerable<Mentor> RateFilter(double rate)
+    {
+        return _databaseContext.Mentors.Where<Mentor>(x => x.Topics.Any(x => x.Rate > rate));
+    }
+
+}
