@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
 import {
   Pagination,
@@ -15,7 +14,7 @@ export const PaginationSection = (): JSX.Element => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center w-full mt-[24px]">
+    <div className="flex flex-col items-center justify-center w-full mt-[48px] mb-[24px]">
       <div className="text-center mb-6">
         <h2 className="font-bold text-[38px] leading-[38px] font-['Vazirmatn',Helvetica]">
           Страница 3 из 3

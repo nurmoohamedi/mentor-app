@@ -23,13 +23,13 @@ export const FooterSection = (): JSX.Element => {
       <div className="relative w-full">
         {/* Background SVG */}
         <img
-          className="w-full h-[630px]"
+          className="w-full h-[400px]"
           alt="Mask"
           src="https://c.animaapp.com/m9jqfbic8vZpku/img/mask.svg"
         />
 
         {/* Back to top button */}
-        <div className="absolute top-[113px] left-1/2 -translate-x-1/2">
+        <div className="absolute top-[-33px] left-1/2 -translate-x-1/2">
           <Button
             className="w-[113px] h-[113px] rounded-full bg-[#2c7fff] hover:bg-[#2c7fff]/90 flex items-center justify-center"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -39,7 +39,7 @@ export const FooterSection = (): JSX.Element => {
         </div>
 
         {/* Footer content container */}
-        <div className="absolute left-[0] top-[250px] inset-[0] flex justify-between p-[32px_32px_32px_78px]">
+        <div className="absolute left-[0] top-[120px] inset-[0] flex justify-between p-[32px_32px_32px_78px]">
           {/* Company description */}
           <div className="w-[400px]">
             <p className="font-['Vazirmatn',Helvetica] text-[18px] leading-7 text-black text-left">
